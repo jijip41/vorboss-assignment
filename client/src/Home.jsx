@@ -12,7 +12,6 @@ export default function Home() {
     error,
     data: orders,
   } = useQuery(['orders'], getAllOrders, { refetchOnWindowFocus: false });
-  console.log(orders?.length);
 
   // Total Orders
 
@@ -33,11 +32,10 @@ export default function Home() {
         <div>
           <p> Total Orders : {orders.length}</p>
           <p>
-            {' '}
-            Total Orders this month:{' '}
+            Total Orders this month:
             {sortOrdersByMonth(orders, monthToday).length}
           </p>
-          <p> Revenue</p>
+          <p> Revenue: {getTotalRevenue(orders)}</p>
           <p> Recent orders</p>
         </div>
       )}
@@ -49,4 +47,9 @@ function sortOrdersByMonth(orders, month) {
   return orders.filter(
     (order) => getMonth(new Date(order.order_placed)) === month
   );
+}
+
+function getTotalRevenue(orders) {
+  const total = orders.reduce((a, c) => a + c.price, 0);
+  return total.toFixed(2);
 }
