@@ -3,7 +3,15 @@ module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
     './build/**/*.{js,jsx,ts,tsx,pug,html}',
+    './views/*.{pug, html}',
   ],
+  purge: {
+    content: [
+      './src/**/*.{js,jsx,ts,tsx}',
+      './src/pages/**/*.{js,jsx,ts,tsx}',
+      './src/components/**/*.{js,jsx,ts,tsx}',
+    ],
+  },
   theme: {
     extend: {
       colors: {
