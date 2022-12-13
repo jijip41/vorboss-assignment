@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import Airtable from 'airtable';
 import cors from 'cors';
 import { config } from '../config.js';
@@ -28,6 +29,10 @@ app.get('/getAll', async (req, res) => {
     })
     .catch(console.error),
     res.status(200).send(arr);
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
 app.listen(PORT, () => {
