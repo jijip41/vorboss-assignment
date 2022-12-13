@@ -1,9 +1,10 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getAllOrders } from './api/airtable.js';
-import { CircleNotch } from 'phosphor-react';
+import { getMonth } from 'date-fns';
 
 import ErrorPage from './ErrorPage.jsx';
+import LoadingPage from './LoadingPage.jsx';
 
 export default function Home() {
   const {
@@ -16,6 +17,7 @@ export default function Home() {
   // Total Orders
 
   // Total Orders this month
+  const monthToday = getMonth(new Date());
 
   // Number of orders in progress
 
@@ -25,9 +27,26 @@ export default function Home() {
 
   return (
     <main>
-      {isLoading && <CircleNotch size={32} />}
+      {isLoading && <LoadingPage />}
       {error && <ErrorPage />}
-      {orders && <div>Total Orders</div>}
+      {orders && (
+        <div>
+          <p> Total Orders : {orders.length}</p>
+          <p>
+            {' '}
+            Total Orders this month:{' '}
+            {sortOrdersByMonth(orders, monthToday).length}
+          </p>
+          <p> Revenue</p>
+          <p> Recent orders</p>
+        </div>
+      )}
     </main>
+  );
+}
+
+function sortOrdersByMonth(orders, month) {
+  return orders.filter(
+    (order) => getMonth(new Date(order.order_placed)) === month
   );
 }
