@@ -1,7 +1,8 @@
 {
   "name": "alice",
+  "type": "module",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "nodemon server/index",
     "build": "cd client && yarn install && yarn build"
   },
   "proxy": "http://localhost:3001",
@@ -9,7 +10,13 @@
     "node": " 14.x"
   },
   "dependencies": {
+    "airtable": "^0.11.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "init-package-json": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
