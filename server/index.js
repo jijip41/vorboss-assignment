@@ -15,6 +15,7 @@ Airtable.configure({
 const base = Airtable.base(config.airtable.base);
 
 app.use(cors());
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get('/getAll', async (req, res) => {
   const arr = [];
