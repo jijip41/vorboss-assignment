@@ -19,21 +19,14 @@ app.get('/getAll', async (req, res) => {
   const arr = [];
   await base
     .table('Orders')
-    .select({})
+    .select({ maxRecords: 1000, view: 'Grid view' })
     .eachPage((records, next) => {
       records.forEach((rec) => {
-        try {
-          arr.push(rec.fields);
-        } catch (err) {
-          console.error(err);
-        }
+        arr.push(rec.fields);
       });
-      try {
-        next();
-      } catch {
-        return;
-      }
-    }),
+      next();
+    })
+    .catch(console.error),
     res.status(200).send(arr);
 });
 
