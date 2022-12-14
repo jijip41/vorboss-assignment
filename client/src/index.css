@@ -95,8 +95,7 @@ td {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border-top-left-radius: 0.3rem;
-  border-top-right-radius: 0.3rem;
+  border-radius: 0.3rem;
   width: 100%;
   padding: 0.5rem 2rem;
   width: 90%;
@@ -114,6 +113,28 @@ td {
 .card-value {
   width: 20%;
   font-size: medium;
+  font-weight: bold;
+}
+
+.card-detail {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.card-detail-name {
+  width: 70%;
+  font-size: medium;
+  font-weight: bold;
+}
+.card-detail-value {
+  width: 20%;
+  font-size: small;
   font-weight: bold;
 }
 
