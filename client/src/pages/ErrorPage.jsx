@@ -1,6 +1,6 @@
 import React from 'react';
 import { CircleWavyWarning } from 'phosphor-react';
-import './index.css';
+import '../index.css';
 
 export default function ErrorPage(props) {
   return (

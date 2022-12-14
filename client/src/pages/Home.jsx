@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getAllOrders } from './api/airtable.js';
 import { getMonth, isWithinInterval, getTime } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import Calendar from 'react-calendar';
 
-import ErrorPage from './ErrorPage.jsx';
+import { getAllOrders } from '../api/airtable.js';
+import ErrorPage from './ErrorPage';
 import LoadingPage from './LoadingPage.jsx';
-import SectionCard from './SectionCard.jsx';
-import './index.css';
+import SectionCard from '../components/SectionCard.jsx';
+import '../index.css';
 import 'react-calendar/dist/Calendar.css';
 
 export default function Home() {
@@ -35,6 +35,7 @@ export default function Home() {
   return (
     <main>
       {isLoading && <LoadingPage />}
+
       {error && <ErrorPage size={32} />}
       {orders && (
         <div className="">

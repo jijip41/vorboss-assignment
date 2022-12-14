@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { CaretDown } from 'phosphor-react';
-import './index.css';
+import '../index.css';
 
 export default function SectionCard({ name, value, detail, detailContent }) {
   const [open, setOpen] = useState(false);

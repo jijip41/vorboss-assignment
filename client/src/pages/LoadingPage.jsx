@@ -1,6 +1,6 @@
 import React from 'react';
 import { CircleNotch } from 'phosphor-react';
-import './index.css';
+import '../index.css';
 
 function LoadingPage() {
   return (
