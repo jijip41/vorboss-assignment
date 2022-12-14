@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --vorboss1: #d6976a;
+  --vorboss2: #132e34;
+  --vorboss3: #1a1a1a;
+  --vorboss4: #d3d3d3;
+}
 
 body {
   margin: 0;
@@ -14,4 +17,149 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+table {
+  width: 60%;
+  border-collapse: collapse;
+}
+
+thead {
+  color: var(--vorboss2);
+  display: table-header-group;
+}
+
+tbody {
+  color: var(--vorboss2);
+}
+
+table,
+th,
+td {
+  padding: 1rem;
+  margin: auto;
+}
+
+.w-h-screen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flex-row-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-row {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2rem;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  color: var(--vorboss4);
+  background-color: var(--vorboss3);
+  text-align: center;
+  height: 10vh;
+  width: 100%;
+}
+
+.section-card-conteiner {
+  width: 70vw;
+  border: 1px solid var(--vorboss1);
+  border-radius: 1rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+  width: 100%;
+  padding: 0.5rem 2rem;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-name {
+  width: 70%;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.card-value {
+  width: 20%;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.text-color-vorboss1 {
+  color: var(--vorboss1);
+}
+
+.text-color-vorboss2 {
+  color: var(--vorboss2);
+}
+
+.text-color-vorboss3 {
+  color: var(--vorboss3);
+}
+
+.text-color-vorboss4 {
+  color: var(--vorboss4);
+}
+
+.bg-color-vorboss1 {
+  background-color: var(--vorboss1);
+}
+
+.bg-color-vorboss2 {
+  background-color: var(--vorboss2);
+}
+
+.bg-color-vorboss3 {
+  background-color: var(--vorboss3);
+}
+
+.bg-color-vorboss4 {
+  background-color: var(--vorboss4);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
