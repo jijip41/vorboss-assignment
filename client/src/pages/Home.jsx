@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getMonth, isWithinInterval, getTime } from 'date-fns';
+import { getMonth } from 'date-fns';
 import DatePicker from 'react-datepicker';
 
 import { getAllOrders } from '../api/airtable.js';
@@ -10,6 +10,13 @@ import SectionCard from '../components/SectionCard.jsx';
 import '../index.css';
 import 'react-calendar/dist/Calendar.css';
 import CalendarContainer from '../components/CalendarContainer.jsx';
+import { sortOrdersByDate, sortOrdersByMonth } from '../helper/sort.js';
+import {
+  getOrdersByDateRange,
+  getOrdersByStatus,
+} from '../helper/getOrders.js';
+import { formatNumber } from '../helper/formatNumbers.js';
+import { getTotalRevenue } from '../helper/sum.js';
 
 export default function Home() {
   const [startDate, setStartDate] = useState(new Date());
@@ -92,7 +99,7 @@ export default function Home() {
             <SectionCard
               name="Revenue"
               detail={true}
-              value={`£ ${formatNumber(getTotalRevenue(orders))}`}
+              value={`£ ${formatNumber(getTotalRevenue(orders, 'price'))}`}
             ></SectionCard>
             <div className="flex-col-center">
               <p className="card-name content-center">
@@ -157,44 +164,4 @@ export default function Home() {
       )}
     </main>
   );
-}
-
-function sortOrdersByMonth(orders, month) {
-  return orders.filter(
-    (order) => getMonth(new Date(order.order_placed)) === month
-  );
-}
-
-function getTotalRevenue(orders) {
-  const total = orders.reduce((a, c) => a + c.price, 0);
-  return total.toFixed(2);
-}
-
-function getOrdersByStatus(orders, status) {
-  return orders.filter((order) => order.order_status === status);
-}
-
-function getOrdersByDateRange(orders, startDate, endDate) {
-  startDate = getTime(new Date(startDate));
-  endDate = getTime(new Date(endDate));
-
-  if (startDate >= endDate) return [];
-
-  return orders.filter((order) => {
-    const orderDate = getTime(new Date(order.order_placed));
-    return isWithinInterval(new Date(orderDate), {
-      start: new Date(startDate),
-      end: new Date(endDate),
-    });
-  });
-}
-
-function sortOrdersByDate(orders, number) {
-  const recentOrders = orders.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
-  return recentOrders.slice(0, number);
-}
-function formatNumber(value) {
-  return new Intl.NumberFormat('en-GB').format(value);
 }
