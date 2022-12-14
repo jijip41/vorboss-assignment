@@ -5,6 +5,8 @@ import { getMonth } from 'date-fns';
 
 import ErrorPage from './ErrorPage.jsx';
 import LoadingPage from './LoadingPage.jsx';
+import SectionCard from './SectionCard.jsx';
+import './index.css';
 
 export default function Home() {
   const {
@@ -27,37 +29,78 @@ export default function Home() {
   return (
     <main>
       {isLoading && <LoadingPage />}
-      {error && <ErrorPage />}
+      {error && <ErrorPage size={32} />}
       {orders && (
-        <div>
-          <p> Total Orders : {orders.length}</p>
-          <p>
-            Total Orders this month:
-            {sortOrdersByMonth(orders, monthToday).length}
-          </p>
-          <p>
-            Orders in progress:{' '}
-            {getOrdersByStatus(orders, 'in_progress').length}
-          </p>
-          <p> Revenue: {getTotalRevenue(orders)}</p>
-          <p>
-            {' '}
-            Recent orders:{' '}
-            <div className="flex">
-              <div>Order number</div>
-              <div>Date</div>
-              <div>Product Name</div>
-              <div>Order Status</div>
-            </div>
-            {sortOrdersByDate(orders, 10).map((order) => (
-              <div key={order.order_id} className="flex">
-                <p>{order.order_id}</p>
-                <p>{order.order_placed}</p>
-                <p>{order.product_name}</p>
-                <p>{order.order_status}</p>
-              </div>
-            ))}
-          </p>
+        <div className="">
+          <div className="flex-col section-card-conteiner">
+            <SectionCard
+              name="Total Orders"
+              value={formatNumber(orders.length)}
+              detail={true}
+              detailContent={[
+                {
+                  name: 'Current Month',
+                  value: formatNumber(
+                    sortOrdersByMonth(orders, monthToday).length
+                  ),
+                },
+              ]}
+            ></SectionCard>
+
+            <SectionCard
+              name="Orders in progress"
+              value={getOrdersByStatus(orders, 'in_progress').length}
+              detail={true}
+              detailContent={[
+                {
+                  name: 'Orders shipped',
+                  value: formatNumber(
+                    sortOrdersByMonth(orders, monthToday).length
+                  ),
+                },
+                {
+                  name: 'Orders placed',
+                  value: getOrdersByStatus(orders, 'shipped').length,
+                },
+                {
+                  name: 'Orders shipped',
+                  value: getOrdersByStatus(orders, 'placed').length,
+                },
+                {
+                  name: 'Orders cancelled',
+                  value: getOrdersByStatus(orders, 'cancelled').length,
+                },
+              ]}
+            ></SectionCard>
+            <SectionCard
+              name="Revenue"
+              detail={true}
+              value={`£ ${formatNumber(getTotalRevenue(orders))}`}
+            ></SectionCard>
+          </div>
+
+          <div className="flex-row-center">Recent orders</div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Order number</th>
+                <th>Date</th>
+                <th>Product Name</th>
+                <th>Order Status</th>
+              </tr>
+            </thead>
+            <tbody className="">
+              {sortOrdersByDate(orders, 10).map((order) => (
+                <tr>
+                  <td>{order.order_id}</td>
+                  <td>{order.order_placed}</td>
+                  <td>{order.product_name}</td>
+                  <td>{order.order_status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </main>
@@ -84,4 +127,8 @@ function sortOrdersByDate(orders, number) {
     (a, b) => new Date(b.date) - new Date(a.date)
   );
   return recentOrders.slice(0, number);
+}
+
+function formatNumber(value) {
+  return new Intl.NumberFormat('en-GB').format(value);
 }
