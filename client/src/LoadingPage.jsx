@@ -1,10 +1,11 @@
 import React from 'react';
 import { CircleNotch } from 'phosphor-react';
+import './index.css';
 
 function LoadingPage() {
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center ">
-      <CircleNotch size={32} className="animate-spin text-vorboss1 " />
+    <div className="flex-col-center w-h-screen">
+      <CircleNotch size={32} className="spin text-color-vorboss1" />
       <p>Loading data</p>
     </div>
   );
