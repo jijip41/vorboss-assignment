@@ -21,16 +21,7 @@ export default function Home() {
     data: orders,
   } = useQuery(['orders'], getAllOrders, { refetchOnWindowFocus: false });
 
-  // Total Orders
-
-  // Total Orders this month
   const monthToday = getMonth(new Date());
-
-  // Number of orders in progress
-
-  // Revenue
-
-  // A list of the most recent few orders
 
   const handleStartDateChange = (date) => {
     setStartDate(date);
@@ -64,26 +55,36 @@ export default function Home() {
 
             <SectionCard
               name="Orders in progress"
-              value={getOrdersByStatus(orders, 'in_progress').length}
+              value={formatNumber(
+                getOrdersByStatus(orders, 'in_progress').length
+              )}
               detail={true}
               detailContent={[
                 {
                   name: 'Orders shipped',
                   value: formatNumber(
-                    sortOrdersByMonth(orders, monthToday).length
+                    getOrdersByStatus(orders, 'shipped').length
                   ),
                 },
                 {
                   name: 'Orders placed',
-                  value: getOrdersByStatus(orders, 'shipped').length,
-                },
-                {
-                  name: 'Orders shipped',
-                  value: getOrdersByStatus(orders, 'placed').length,
+                  value: formatNumber(
+                    getOrdersByStatus(orders, 'placed').length
+                  ),
                 },
                 {
                   name: 'Orders cancelled',
-                  value: getOrdersByStatus(orders, 'cancelled').length,
+                  value: formatNumber(
+                    getOrdersByStatus(orders, 'cancelled').length
+                  ),
+                },
+                {
+                  name: 'Cancellation rate',
+                  value: formatNumber(
+                    (orders.length /
+                      getOrdersByStatus(orders, 'cancelled').length) *
+                      100
+                  ),
                 },
               ]}
             ></SectionCard>
@@ -132,7 +133,7 @@ export default function Home() {
             </thead>
             <tbody className="">
               {sortOrdersByDate(orders, 10).map((order) => (
-                <tr>
+                <tr key={order.order_id}>
                   <td>{order.order_id}</td>
                   <td>{order.order_placed}</td>
                   <td>{order.product_name}</td>
