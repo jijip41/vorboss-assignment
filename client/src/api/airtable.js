@@ -1,5 +1,5 @@
 export async function getAllOrders() {
-  const data = await fetch(`https://alice-2b5z.onrender.com/getAll`, {
+  const data = await fetch(`https://alice-2b5z.onrender.com/orders/total`, {
     method: 'GET',
   })
     .then((res) => res.json())
