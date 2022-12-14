@@ -12,5 +12,6 @@ export const config = {
     endpontUrl: required('AIRTABLE_ENDPOINT_URL'),
     apiKey: required('AIRTABLE_API_KEY'),
     base: required('AIRTABLE_BASE'),
+    placedDateId: required('AIRTABLE_PLACED_DATE_ID'),
   },
 };

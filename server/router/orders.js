@@ -15,7 +15,11 @@ router.get('/:maxRecords', async (req, res, next) => {
   const arr = [];
   const data = await base
     .table('Orders')
-    .select({ maxRecords: maxNumber, view: 'Grid view' })
+    .select({
+      maxRecords: maxNumber,
+      view: 'Grid view',
+      sort: [{ field: config.airtable.placedDateId, direction: 'desc' }],
+    })
     .eachPage((records, next) => {
       records.forEach((rec) => {
         arr.push(rec.fields);
