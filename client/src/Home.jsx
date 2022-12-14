@@ -80,11 +80,11 @@ export default function Home() {
                 },
                 {
                   name: 'Cancellation rate',
-                  value: formatNumber(
-                    (orders.length /
-                      getOrdersByStatus(orders, 'cancelled').length) *
+                  value: `${formatNumber(
+                    (getOrdersByStatus(orders, 'cancelled').length /
+                      orders.length) *
                       100
-                  ),
+                  )} %`,
                 },
               ]}
             ></SectionCard>
@@ -93,55 +93,63 @@ export default function Home() {
               detail={true}
               value={`£ ${formatNumber(getTotalRevenue(orders))}`}
             ></SectionCard>
-            <div>
-              <p>Total orders by date range? </p>
-              <div className="calendar-row-left">
-                <p>From: </p>
+            <div className="flex-col-center">
+              <p className="card-name content-center">
+                Total orders by date range
+              </p>
+              <div className="flex-row">
+                <div className="calendar-row-left">
+                  <p className="padding-x-small">From: </p>
 
-                <DatePicker
-                  selected={startDate}
-                  onCalendarClose={() => handleStartDateChange(startDate)}
-                  calendarContainer={() => MyContainer(startDate, setStartDate)}
-                  shouldCloseOnSelect={true}
-                  dateFormat="dd/MM/yyyy"
-                />
-              </div>
-              <div className="calendar-row-left">
-                <p>To: </p>
-                <DatePicker
-                  selected={endDate}
-                  onCalendarClose={() => handleEndDateChange(endDate)}
-                  onChange={handleEndDateChange}
-                  calendarContainer={() => MyContainer(endDate, setEndDate)}
-                  dateFormat="dd/MM/yyyy"
-                />
-                {ordersByRange.length}
+                  <DatePicker
+                    selected={startDate}
+                    onCalendarClose={() => handleStartDateChange(startDate)}
+                    calendarContainer={() =>
+                      MyContainer(startDate, setStartDate)
+                    }
+                    shouldCloseOnSelect={true}
+                    dateFormat="dd/MM/yyyy"
+                  />
+                </div>
+                <div className="calendar-row-left">
+                  <p className="padding-x-small">To: </p>
+                  <DatePicker
+                    selected={endDate}
+                    onCalendarClose={() => handleEndDateChange(endDate)}
+                    onChange={handleEndDateChange}
+                    calendarContainer={() => MyContainer(endDate, setEndDate)}
+                    dateFormat="dd/MM/yyyy"
+                  />
+                </div>
+                <div className="flex-row-center card-value">
+                  {ordersByRange.length}
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="flex-row-center">Recent orders</div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Order number</th>
-                <th>Date</th>
-                <th>Product Name</th>
-                <th>Order Status</th>
-              </tr>
-            </thead>
-            <tbody className="">
-              {sortOrdersByDate(orders, 10).map((order) => (
-                <tr key={order.order_id}>
-                  <td>{order.order_id}</td>
-                  <td>{order.order_placed}</td>
-                  <td>{order.product_name}</td>
-                  <td>{order.order_status}</td>
+          <div className="flex-col-center">
+            <p className="card-name content-center">Recent orders</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Order number</th>
+                  <th>Date</th>
+                  <th>Product Name</th>
+                  <th>Order Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="">
+                {sortOrdersByDate(orders, 10).map((order) => (
+                  <tr key={order.order_id}>
+                    <td>{order.order_id}</td>
+                    <td>{order.order_placed}</td>
+                    <td>{order.product_name}</td>
+                    <td>{order.order_status.replaceAll('_', ' ')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </main>

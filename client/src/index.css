@@ -38,6 +38,7 @@ th,
 td {
   padding: 1rem;
   margin: auto;
+  text-align: center;
 }
 
 .w-h-screen {
@@ -57,6 +58,7 @@ td {
 
 .flex-row {
   display: flex;
+  gap: 3rem;
 }
 
 .flex-col {
@@ -175,6 +177,14 @@ td {
 
 .bg-color-vorboss4 {
   background-color: var(--vorboss4);
+}
+
+.content-center {
+  text-align: center;
+}
+
+.padding-x-small {
+  padding: 0 0.5rem;
 }
 
 .pointer {
