@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMonth, isWithinInterval, getTime } from 'date-fns';
 import DatePicker from 'react-datepicker';
-import Calendar from 'react-calendar';
 
 import { getAllOrders } from '../api/airtable.js';
 import ErrorPage from './ErrorPage';
@@ -10,6 +9,7 @@ import LoadingPage from './LoadingPage.jsx';
 import SectionCard from '../components/SectionCard.jsx';
 import '../index.css';
 import 'react-calendar/dist/Calendar.css';
+import CalendarContainer from '../components/CalendarContainer.jsx';
 
 export default function Home() {
   const [startDate, setStartDate] = useState(new Date());
@@ -106,7 +106,7 @@ export default function Home() {
                     selected={startDate}
                     onCalendarClose={() => handleStartDateChange(startDate)}
                     calendarContainer={() =>
-                      MyContainer(startDate, setStartDate)
+                      CalendarContainer(startDate, setStartDate)
                     }
                     shouldCloseOnSelect={true}
                     dateFormat="dd/MM/yyyy"
@@ -118,7 +118,9 @@ export default function Home() {
                     selected={endDate}
                     onCalendarClose={() => handleEndDateChange(endDate)}
                     onChange={handleEndDateChange}
-                    calendarContainer={() => MyContainer(endDate, setEndDate)}
+                    calendarContainer={() =>
+                      CalendarContainer(endDate, setEndDate)
+                    }
                     dateFormat="dd/MM/yyyy"
                   />
                 </div>
@@ -196,15 +198,3 @@ function sortOrdersByDate(orders, number) {
 function formatNumber(value) {
   return new Intl.NumberFormat('en-GB').format(value);
 }
-
-const MyContainer = (date, callback) => {
-  return (
-    <div>
-      <Calendar
-        onChange={(data) => callback(data)}
-        onClick={(data) => callback(data)}
-        value={date}
-      />
-    </div>
-  );
-};
