@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getAllOrders } from './api/airtable.js';
-import { getMonth } from 'date-fns';
+import { getMonth, isWithinInterval, getTime } from 'date-fns';
+import DatePicker from 'react-datepicker';
+import Calendar from 'react-calendar';
 
 import ErrorPage from './ErrorPage.jsx';
 import LoadingPage from './LoadingPage.jsx';
 import SectionCard from './SectionCard.jsx';
 import './index.css';
+import 'react-calendar/dist/Calendar.css';
 
 export default function Home() {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [ordersByRange, setOrdersByRange] = useState([]);
   const {
     isLoading,
     error,
@@ -26,6 +32,15 @@ export default function Home() {
 
   // A list of the most recent few orders
 
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+    setOrdersByRange(getOrdersByDateRange(orders, date, endDate));
+  };
+
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+    setOrdersByRange(getOrdersByDateRange(orders, startDate, date));
+  };
   return (
     <main>
       {isLoading && <LoadingPage />}
@@ -77,6 +92,31 @@ export default function Home() {
               detail={true}
               value={`£ ${formatNumber(getTotalRevenue(orders))}`}
             ></SectionCard>
+            <div>
+              <p>Total orders by date range? </p>
+              <div className="calendar-row-left">
+                <p>From: </p>
+
+                <DatePicker
+                  selected={startDate}
+                  onCalendarClose={() => handleStartDateChange(startDate)}
+                  calendarContainer={() => MyContainer(startDate, setStartDate)}
+                  shouldCloseOnSelect={true}
+                  dateFormat="dd/MM/yyyy"
+                />
+              </div>
+              <div className="calendar-row-left">
+                <p>To: </p>
+                <DatePicker
+                  selected={endDate}
+                  onCalendarClose={() => handleEndDateChange(endDate)}
+                  onChange={handleEndDateChange}
+                  calendarContainer={() => MyContainer(endDate, setEndDate)}
+                  dateFormat="dd/MM/yyyy"
+                />
+                {ordersByRange.length}
+              </div>
+            </div>
           </div>
 
           <div className="flex-row-center">Recent orders</div>
@@ -122,13 +162,39 @@ function getOrdersByStatus(orders, status) {
   return orders.filter((order) => order.order_status === status);
 }
 
+function getOrdersByDateRange(orders, startDate, endDate) {
+  startDate = getTime(new Date(startDate));
+  endDate = getTime(new Date(endDate));
+
+  if (startDate >= endDate) return [];
+
+  return orders.filter((order) => {
+    const orderDate = getTime(new Date(order.order_placed));
+    return isWithinInterval(new Date(orderDate), {
+      start: new Date(startDate),
+      end: new Date(endDate),
+    });
+  });
+}
+
 function sortOrdersByDate(orders, number) {
   const recentOrders = orders.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
   return recentOrders.slice(0, number);
 }
-
 function formatNumber(value) {
   return new Intl.NumberFormat('en-GB').format(value);
 }
+
+const MyContainer = (date, callback) => {
+  return (
+    <div>
+      <Calendar
+        onChange={(data) => callback(data)}
+        onClick={(data) => callback(data)}
+        value={date}
+      />
+    </div>
+  );
+};
