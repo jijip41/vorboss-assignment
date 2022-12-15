@@ -3,12 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { getMonth } from 'date-fns';
 import DatePicker from 'react-datepicker';
 
+import '../index.css';
+import 'react-calendar/dist/Calendar.css';
 import { getAllOrders } from '../api/airtable.js';
 import ErrorPage from './ErrorPage';
 import LoadingPage from './LoadingPage.jsx';
 import SectionCard from '../components/SectionCard.jsx';
-import '../index.css';
-import 'react-calendar/dist/Calendar.css';
 import CalendarContainer from '../components/CalendarContainer.jsx';
 import { sortOrdersByDate, sortOrdersByMonth } from '../helper/sort.js';
 import {
@@ -17,6 +17,7 @@ import {
 } from '../helper/getOrders.js';
 import { formatNumber } from '../helper/formatNumbers.js';
 import { getTotalRevenue } from '../helper/sum.js';
+import { detailsContent } from '../constants/detailContent';
 
 export default function Home() {
   const [startDate, setStartDate] = useState(new Date());
@@ -67,34 +68,7 @@ export default function Home() {
                 getOrdersByStatus(orders, 'in_progress').length
               )}
               detail={true}
-              detailContent={[
-                {
-                  name: 'Orders shipped',
-                  value: formatNumber(
-                    getOrdersByStatus(orders, 'shipped').length
-                  ),
-                },
-                {
-                  name: 'Orders placed',
-                  value: formatNumber(
-                    getOrdersByStatus(orders, 'placed').length
-                  ),
-                },
-                {
-                  name: 'Orders cancelled',
-                  value: formatNumber(
-                    getOrdersByStatus(orders, 'cancelled').length
-                  ),
-                },
-                {
-                  name: 'Cancellation rate',
-                  value: `${formatNumber(
-                    (getOrdersByStatus(orders, 'cancelled').length /
-                      orders.length) *
-                      100
-                  )} %`,
-                },
-              ]}
+              detailContent={detailsContent(orders)}
             ></SectionCard>
             <SectionCard
               name="Revenue"
@@ -149,14 +123,16 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody className="">
-                {sortOrdersByDate(orders, 10).map((order) => (
-                  <tr key={order.order_id}>
-                    <td>{order.order_id}</td>
-                    <td>{order.order_placed}</td>
-                    <td>{order.product_name}</td>
-                    <td>{order.order_status.replaceAll('_', ' ')}</td>
-                  </tr>
-                ))}
+                {sortOrdersByDate(orders, 10).map(
+                  ({ order_id, order_placed, product_name, order_status }) => (
+                    <tr key={order_id}>
+                      <td>{order_id}</td>
+                      <td>{order_placed}</td>
+                      <td>{product_name}</td>
+                      <td>{order_status.replaceAll('_', ' ')}</td>
+                    </tr>
+                  )
+                )}
               </tbody>
             </table>
           </div>
