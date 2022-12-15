@@ -115,8 +115,8 @@ export default function Home() {
             </div>
           </div>
           <div className="flex-col-center">
-            <p className="card-name content-center">Recent orders</p>
-            <table>
+            <p className="title">Recent orders</p>
+            <table className="section-card-conteiner flex-row-center">
               <thead>
                 <tr>
                   <th>Order number</th>

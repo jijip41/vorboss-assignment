@@ -129,6 +129,19 @@ td {
   margin: auto;
 }
 
+.title {
+  background-color: var(--vorboss1);
+  border-radius: 0.3rem;
+  width: 60vw;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+  font-weight: bold;
+  margin: 2rem 0 0 0;
+}
+
 .card-detail-name {
   width: 70%;
   font-size: medium;
