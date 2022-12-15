@@ -3,9 +3,14 @@ import { useState } from 'react';
 import { CaretDown } from 'phosphor-react';
 import '../index.css';
 
-export default function SectionCard({ name, value, detail, detailContent }) {
+export default function SectionCard({
+  name,
+  value,
+  detail,
+  detailContent,
+  graph,
+}) {
   const [open, setOpen] = useState(false);
-
   return (
     <div className="flex-col">
       <div className="text-color-vorboss2 bg-color-vorboss1 card">
@@ -29,6 +34,7 @@ export default function SectionCard({ name, value, detail, detailContent }) {
             <span className="card-detail-value">{content.value}</span>
           </div>
         ))}
+      {open && graph && <div className="flex-row-center">{graph}</div>}
     </div>
   );
 }

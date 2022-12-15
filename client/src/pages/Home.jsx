@@ -10,6 +10,7 @@ import ErrorPage from './ErrorPage';
 import LoadingPage from './LoadingPage.jsx';
 import SectionCard from '../components/SectionCard.jsx';
 import CalendarContainer from '../components/CalendarContainer.jsx';
+import { LineGraph } from '../components/LineGraph';
 import { sortOrdersByDate, sortOrdersByMonth } from '../helper/sort.js';
 import {
   getOrdersByDateRange,
@@ -18,6 +19,7 @@ import {
 import { formatNumber } from '../helper/formatNumbers.js';
 import { getTotalRevenue } from '../helper/sum.js';
 import { detailsContent } from '../constants/detailContent';
+import { monthlyRevenue } from '../constants/monthlyRevenue';
 
 export default function Home() {
   const [startDate, setStartDate] = useState(new Date());
@@ -74,6 +76,7 @@ export default function Home() {
               name="Revenue"
               detail={true}
               value={`£ ${formatNumber(getTotalRevenue(orders, 'price'))}`}
+              graph={<LineGraph orders={monthlyRevenue(orders)} />}
             ></SectionCard>
             <div className="flex-col-center">
               <p className="card-name content-center">
