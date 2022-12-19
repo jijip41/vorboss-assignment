@@ -1,10 +1,10 @@
 # vorboss-assignment
 
-## Getting started
+## Getting started with Docker
 
-- Run `yarn` to install dependencies, and `yarn build` to build for the first time.
+- Create `.env` file and add `PORT=3000`
 
-- Run `yarn start` to start the app on the browser. You will be able to watch the web app locally while building: [localhost:3000](http://localhost:3000)
+- Run `docker compose up --build` to start the app with Docker. You will be able to watch the web app locally while building the app: [localhost:3000](http://localhost:3000)
 
 
 ## Alice-server Repo
