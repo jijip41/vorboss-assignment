@@ -6,7 +6,7 @@ export function monthlyRevenue(orders) {
   return orders.reduce((a, c) => {
     const month = getMonth(new Date(c.order_placed)) + 1;
     const year = getYear(new Date(c.order_placed));
-    const monthYear = `${month} ${year}`;
+    const monthYear = `${month}/${year}`;
     const isExsist = result.hasOwnProperty(monthYear);
 
     if (!isExsist) {
