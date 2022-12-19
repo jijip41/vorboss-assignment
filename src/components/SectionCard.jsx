@@ -33,10 +33,10 @@ export default function SectionCard({
       {open &&
         detailContent &&
         detailContent.map((content, index) => (
-          <div key={index} className="card-detail">
+          <p key={index} className="card-detail">
             <span className="card-detail-name">{content.name}: </span>
             <span className="card-detail-value">{content.value}</span>
-          </div>
+          </p>
         ))}
       {open && graph && <div className="flex-row-center">{graph}</div>}
     </div>
