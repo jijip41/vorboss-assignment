@@ -10,8 +10,10 @@ import {
 export function LineGraph(orders) {
   const data = orders;
   return (
-    <div style={{ width: '90%', height: 300 }}>
-      <p>Monthly Revenue</p>
+    <div style={{ width: '90%', height: 300 }} className="pb-md">
+      <p className="flex-row-center bold text-color-vorboss3">
+        Monthly Revenue
+      </p>
       <ResponsiveContainer>
         <LineChart
           data={data.orders}

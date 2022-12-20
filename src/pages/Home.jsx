@@ -78,8 +78,8 @@ export default function Home() {
               value={`£ ${formatNumber(getTotalRevenue(orders, 'price'))}`}
               graph={<LineGraph orders={monthlyRevenue(orders)} />}
             ></SectionCard>
-            <div className="flex-col-center">
-              <p className="card-name content-center">
+            <div className="flex-col-center ">
+              <p className="card-name content-center title text-color-vorboss2">
                 Total orders by date range
               </p>
               <div className="flex-row">
@@ -115,7 +115,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex-col-center">
-            <p className="title">Recent orders</p>
+            <p className="title ">Recent orders</p>
             <table className="section-card-conteiner flex-row-center">
               <thead>
                 <tr>
@@ -125,7 +125,7 @@ export default function Home() {
                   <th>Order Status</th>
                 </tr>
               </thead>
-              <tbody className="">
+              <tbody>
                 {sortOrdersByDate(orders, 10).map(
                   ({ order_id, order_placed, product_name, order_status }) => (
                     <tr key={order_id}>

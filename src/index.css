@@ -20,25 +20,14 @@ code {
 }
 
 table {
-  width: 60%;
-  border-collapse: collapse;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
-thead {
-  color: var(--vorboss2);
-  display: table-header-group;
-}
-
-tbody {
-  color: var(--vorboss2);
-}
-
-table,
 th,
 td {
-  padding: 1rem;
-  margin: auto;
   text-align: center;
+  padding: 0 2rem;
 }
 
 .w-h-screen {
@@ -160,6 +149,21 @@ td {
   align-items: center;
 }
 
+.table-conteiner {
+  width: 70vw;
+  border: 1px solid var(--vorboss1);
+  border-radius: 1rem;
+  margin: 2rem auto;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.pb-md {
+  padding-bottom: 2rem;
+}
+
 .text-color-vorboss1 {
   color: var(--vorboss1);
 }
@@ -190,6 +194,22 @@ td {
 
 .bg-color-vorboss4 {
   background-color: var(--vorboss4);
+}
+
+.text-color-vorboss1 {
+  color: var(--vorboss1);
+}
+
+.text-color-vorboss2 {
+  color: var(--vorboss2);
+}
+
+.text-color-vorboss3 {
+  color: var(--vorboss3);
+}
+
+.text-color-vorboss4 {
+  color: var(--vorboss4);
 }
 
 .content-center {
