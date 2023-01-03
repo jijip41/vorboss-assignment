@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { CaretDown, CaretUp } from "phosphor-react"
 
-import "../index.css"
-
 export function SectionCard({ name, value, detail, detailContent, graph }) {
   const [open, setOpen] = useState(false)
   return (
