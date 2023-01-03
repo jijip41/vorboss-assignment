@@ -20,6 +20,7 @@ import { formatNumber } from '../helper/formatNumbers.js';
 import { getTotalRevenue } from '../helper/sum.js';
 import { detailsContent } from '../constants/detailContent';
 import { monthlyRevenue } from '../constants/monthlyRevenue';
+import Table from '../components/Table';
 
 export default function Home() {
   const [startDate, setStartDate] = useState(new Date());
@@ -116,28 +117,7 @@ export default function Home() {
           </div>
           <div className="flex-col-center">
             <p className="title ">Recent orders</p>
-            <table className="section-card-conteiner flex-row-center">
-              <thead>
-                <tr>
-                  <th>Order number</th>
-                  <th>Date</th>
-                  <th>Product Name</th>
-                  <th>Order Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortOrdersByDate(orders, 10).map(
-                  ({ order_id, order_placed, product_name, order_status }) => (
-                    <tr key={order_id}>
-                      <td>{order_id}</td>
-                      <td>{order_placed}</td>
-                      <td>{product_name}</td>
-                      <td>{order_status.replaceAll('_', ' ')}</td>
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </table>
+            <Table orders={orders} />
           </div>
         </div>
       )}
