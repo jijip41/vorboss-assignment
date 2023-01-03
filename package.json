@@ -55,7 +55,7 @@
           ],
           "pathGroups": [
             {
-              "pattern": "{{common,config,features},{common,config,features}/**}",
+              "pattern": "{{api,components,constants,helper,pages,features},{api,components,constants,helper,pages,features}/**}",
               "group": "internal"
             }
           ],
