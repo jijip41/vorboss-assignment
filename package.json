@@ -25,10 +25,63 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "root": true,
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+      "requireConfigFile": false,
+      "babelOptions": {
+        "presets": [
+          "@babel/preset-react"
+        ]
+      }
+    },
     "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+      "plugin:import/recommended",
+      "prettier"
+    ],
+    "rules": {
+      "react/no-unescaped-entities": "off",
+      "import/no-default-export": "error",
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index"
+          ],
+          "pathGroups": [
+            {
+              "pattern": "{{common,config,features},{common,config,features}/**}",
+              "group": "internal"
+            }
+          ],
+          "newlines-between": "always"
+        }
+      ],
+      "no-console": "warn",
+      "padding-line-between-statements": [
+        "error",
+        {
+          "blankLine": "always",
+          "prev": "function",
+          "next": "*"
+        },
+        {
+          "blankLine": "always",
+          "prev": "*",
+          "next": "function"
+        }
+      ]
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "trailingComma": "es5",
+    "arrowParens": "avoid"
   },
   "browserslist": {
     "production": [
@@ -41,5 +94,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.7",
+    "@babel/eslint-parser": "^7.19.1",
+    "@babel/preset-react": "^7.18.6",
+    "babel-plugin-named-exports-order": "^0.0.2",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.8.1"
   }
 }
