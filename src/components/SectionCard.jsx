@@ -1,16 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
-import { CaretDown, CaretUp } from 'phosphor-react';
-import '../index.css';
+import { useState } from "react"
+import { CaretDown, CaretUp } from "phosphor-react"
 
-export default function SectionCard({
-  name,
-  value,
-  detail,
-  detailContent,
-  graph,
-}) {
-  const [open, setOpen] = useState(false);
+import "../index.css"
+
+export function SectionCard({ name, value, detail, detailContent, graph }) {
+  const [open, setOpen] = useState(false)
   return (
     <div className="flex-col">
       <div className="text-color-vorboss2 bg-color-vorboss1 card">
@@ -40,5 +34,5 @@ export default function SectionCard({
         ))}
       {open && graph && <div className="flex-row-center">{graph}</div>}
     </div>
-  );
+  )
 }

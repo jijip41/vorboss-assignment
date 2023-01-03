@@ -1,22 +1,23 @@
-import { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import CalendarContainer from '../components/CalendarContainer.jsx';
-import { getOrdersByDateRange } from '../helper/getOrders';
+import { useState } from "react"
+import DatePicker from "react-datepicker"
 
-export default function OrdersByDateRange({ orders }) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [ordersByRange, setOrdersByRange] = useState([]);
+import { CalendarContainer } from "../components/CalendarContainer.jsx"
+import { getOrdersByDateRange } from "../helper/getOrders"
 
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
-    setOrdersByRange(getOrdersByDateRange(orders, date, endDate));
-  };
+export function OrdersByDateRange({ orders }) {
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(new Date())
+  const [ordersByRange, setOrdersByRange] = useState([])
 
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-    setOrdersByRange(getOrdersByDateRange(orders, startDate, date));
-  };
+  const handleStartDateChange = date => {
+    setStartDate(date)
+    setOrdersByRange(getOrdersByDateRange(orders, date, endDate))
+  }
+
+  const handleEndDateChange = date => {
+    setEndDate(date)
+    setOrdersByRange(getOrdersByDateRange(orders, startDate, date))
+  }
 
   return (
     <div className="flex-row">
@@ -43,5 +44,5 @@ export default function OrdersByDateRange({ orders }) {
       </div>
       <div className="flex-row-center card-value">{ordersByRange.length}</div>
     </div>
-  );
+  )
 }

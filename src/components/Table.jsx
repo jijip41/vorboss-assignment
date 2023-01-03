@@ -1,7 +1,6 @@
-import React from 'react';
-import { sortOrdersByDate } from '../helper/sort';
+import { sortOrdersByDate } from "../helper/sort"
 
-export default function Table({ orders }) {
+export function Table({ orders }) {
   return (
     <div>
       <table className="section-card-conteiner flex-row-center">
@@ -20,12 +19,12 @@ export default function Table({ orders }) {
                 <td>{order_id}</td>
                 <td>{order_placed}</td>
                 <td>{product_name}</td>
-                <td>{order_status.replaceAll('_', ' ')}</td>
+                <td>{order_status.replaceAll("_", " ")}</td>
               </tr>
             )
           )}
         </tbody>
       </table>
     </div>
-  );
+  )
 }

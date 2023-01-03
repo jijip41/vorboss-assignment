@@ -5,12 +5,12 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-} from 'recharts';
+} from "recharts"
 
 export function LineGraph(orders) {
-  const data = orders;
+  const data = orders
   return (
-    <div style={{ width: '90%', height: 300 }} className="pb-md">
+    <div style={{ width: "90%", height: 300 }} className="pb-md">
       <p className="flex-row-center bold text-color-vorboss3">
         Monthly Revenue
       </p>
@@ -36,5 +36,5 @@ export function LineGraph(orders) {
         </LineChart>
       </ResponsiveContainer>
     </div>
-  );
+  )
 }

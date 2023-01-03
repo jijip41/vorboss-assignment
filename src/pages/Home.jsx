@@ -1,31 +1,32 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getMonth } from 'date-fns';
+import { useQuery } from "@tanstack/react-query"
+import { getMonth } from "date-fns"
 
-import '../index.css';
-import 'react-calendar/dist/Calendar.css';
-import { getAllOrders } from '../api/airtable.js';
-import ErrorPage from './ErrorPage';
-import LoadingPage from './LoadingPage.jsx';
-import SectionCard from '../components/SectionCard.jsx';
-import { LineGraph } from '../components/LineGraph';
-import { sortOrdersByMonth } from '../helper/sort.js';
-import { getOrdersByStatus } from '../helper/getOrders.js';
-import { formatNumber } from '../helper/formatNumbers.js';
-import { getTotalRevenue } from '../helper/sum.js';
-import { detailsContent } from '../constants/detailContent';
-import { monthlyRevenue } from '../constants/monthlyRevenue';
-import Table from '../components/Table';
-import OrdersByDateRange from '../components/OrdersByDateRange';
+import "../index.css"
+import "react-calendar/dist/Calendar.css"
 
-export default function Home() {
+import { getAllOrders } from "../api/airtable.js"
+import { LineGraph } from "../components/LineGraph.jsx"
+import { SectionCard } from "../components/SectionCard.jsx"
+import { OrdersByDateRange } from "../components/OrdersByDateRange.jsx"
+import { Table } from "../components/Table.jsx"
+import { sortOrdersByMonth } from "../helper/sort.js"
+import { getOrdersByStatus } from "../helper/getOrders.js"
+import { formatNumber } from "../helper/formatNumbers.js"
+import { getTotalRevenue } from "../helper/sum.js"
+import { detailsContent } from "../constants/detailContent"
+import { monthlyRevenue } from "../constants/monthlyRevenue"
+
+import { LoadingPage } from "./LoadingPage.jsx"
+import { ErrorPage } from "./ErrorPage.jsx"
+
+export function Home() {
   const {
     isLoading,
     error,
     data: orders,
-  } = useQuery(['orders'], getAllOrders, { refetchOnWindowFocus: false });
+  } = useQuery(["orders"], getAllOrders, { refetchOnWindowFocus: false })
 
-  const monthToday = getMonth(new Date());
+  const monthToday = getMonth(new Date())
 
   return (
     <main>
@@ -40,7 +41,7 @@ export default function Home() {
               detail={true}
               detailContent={[
                 {
-                  name: 'Current Month',
+                  name: "Current Month",
                   value: formatNumber(
                     sortOrdersByMonth(orders, monthToday).length
                   ),
@@ -50,7 +51,7 @@ export default function Home() {
             <SectionCard
               name="Orders in progress"
               value={formatNumber(
-                getOrdersByStatus(orders, 'in_progress').length
+                getOrdersByStatus(orders, "in_progress").length
               )}
               detail={true}
               detailContent={detailsContent(orders)}
@@ -58,7 +59,7 @@ export default function Home() {
             <SectionCard
               name="Revenue"
               detail={true}
-              value={`£ ${formatNumber(getTotalRevenue(orders, 'price'))}`}
+              value={`£ ${formatNumber(getTotalRevenue(orders, "price"))}`}
               graph={<LineGraph orders={monthlyRevenue(orders)} />}
             ></SectionCard>
             <div className="flex-col-center ">
@@ -75,5 +76,5 @@ export default function Home() {
         </div>
       )}
     </main>
-  );
+  )
 }
