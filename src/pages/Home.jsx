@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMonth } from 'date-fns';
 
@@ -9,11 +9,8 @@ import ErrorPage from './ErrorPage';
 import LoadingPage from './LoadingPage.jsx';
 import SectionCard from '../components/SectionCard.jsx';
 import { LineGraph } from '../components/LineGraph';
-import { sortOrdersByDate, sortOrdersByMonth } from '../helper/sort.js';
-import {
-  getOrdersByDateRange,
-  getOrdersByStatus,
-} from '../helper/getOrders.js';
+import { sortOrdersByMonth } from '../helper/sort.js';
+import { getOrdersByStatus } from '../helper/getOrders.js';
 import { formatNumber } from '../helper/formatNumbers.js';
 import { getTotalRevenue } from '../helper/sum.js';
 import { detailsContent } from '../constants/detailContent';
@@ -33,7 +30,6 @@ export default function Home() {
   return (
     <main>
       {isLoading && <LoadingPage />}
-
       {error && <ErrorPage size={32} />}
       {orders && (
         <div className="">
@@ -51,7 +47,6 @@ export default function Home() {
                 },
               ]}
             ></SectionCard>
-
             <SectionCard
               name="Orders in progress"
               value={formatNumber(
