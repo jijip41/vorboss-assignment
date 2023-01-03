@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMonth } from 'date-fns';
-import DatePicker from 'react-datepicker';
 
 import '../index.css';
 import 'react-calendar/dist/Calendar.css';
@@ -9,7 +8,6 @@ import { getAllOrders } from '../api/airtable.js';
 import ErrorPage from './ErrorPage';
 import LoadingPage from './LoadingPage.jsx';
 import SectionCard from '../components/SectionCard.jsx';
-import CalendarContainer from '../components/CalendarContainer.jsx';
 import { LineGraph } from '../components/LineGraph';
 import { sortOrdersByDate, sortOrdersByMonth } from '../helper/sort.js';
 import {
@@ -21,11 +19,9 @@ import { getTotalRevenue } from '../helper/sum.js';
 import { detailsContent } from '../constants/detailContent';
 import { monthlyRevenue } from '../constants/monthlyRevenue';
 import Table from '../components/Table';
+import OrdersByDateRange from '../components/OrdersByDateRange';
 
 export default function Home() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [ordersByRange, setOrdersByRange] = useState([]);
   const {
     isLoading,
     error,
@@ -34,15 +30,6 @@ export default function Home() {
 
   const monthToday = getMonth(new Date());
 
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
-    setOrdersByRange(getOrdersByDateRange(orders, date, endDate));
-  };
-
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-    setOrdersByRange(getOrdersByDateRange(orders, startDate, date));
-  };
   return (
     <main>
       {isLoading && <LoadingPage />}
@@ -83,36 +70,7 @@ export default function Home() {
               <p className="card-name content-center title text-color-vorboss2">
                 Total orders by date range
               </p>
-              <div className="flex-row">
-                <div className="calendar-row-left">
-                  <p className="padding-x-small">From: </p>
-
-                  <DatePicker
-                    selected={startDate}
-                    onCalendarClose={() => handleStartDateChange(startDate)}
-                    calendarContainer={() =>
-                      CalendarContainer(startDate, setStartDate)
-                    }
-                    shouldCloseOnSelect={true}
-                    dateFormat="dd/MM/yyyy"
-                  />
-                </div>
-                <div className="calendar-row-left">
-                  <p className="padding-x-small">To: </p>
-                  <DatePicker
-                    selected={endDate}
-                    onCalendarClose={() => handleEndDateChange(endDate)}
-                    onChange={handleEndDateChange}
-                    calendarContainer={() =>
-                      CalendarContainer(endDate, setEndDate)
-                    }
-                    dateFormat="dd/MM/yyyy"
-                  />
-                </div>
-                <div className="flex-row-center card-value">
-                  {ordersByRange.length}
-                </div>
-              </div>
+              <OrdersByDateRange orders={orders} />
             </div>
           </div>
           <div className="flex-col-center">
