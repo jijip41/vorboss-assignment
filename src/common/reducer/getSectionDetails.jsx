@@ -1,8 +1,7 @@
 import { getMonth } from "date-fns"
 
-import { useOrders } from "../hooks/useOrders.jsx"
+import { useOrders } from "../hooks/useOrders"
 import { detailsContent } from "../constants/detailContent"
-import { monthlyRevenue } from "../constants/monthlyRevenue"
 import { formatNumber } from "../helper/formatNumbers"
 import { getOrdersByStatus } from "../helper/getOrders"
 import { sortOrdersByMonth } from "../helper/sort"

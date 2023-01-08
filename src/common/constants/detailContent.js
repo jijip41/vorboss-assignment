@@ -1,5 +1,5 @@
-import { formatNumber } from "../helper/formatNumbers.js"
-import { getOrdersByStatus } from "../helper/getOrders.js"
+import { formatNumber } from "../helper/formatNumbers"
+import { getOrdersByStatus } from "../helper/getOrders"
 
 export function detailsContent(orders) {
   return [

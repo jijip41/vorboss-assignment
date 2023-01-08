@@ -40,8 +40,19 @@
       "prettier"
     ],
     "rules": {
+      "eslint": 2,
+      "plugin": "react/recommended",
       "react/no-unescaped-entities": "off",
       "import/no-default-export": "error",
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
       "import/order": [
         "error",
         {
@@ -103,6 +114,7 @@
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react": "^7.31.11",
     "prettier": "^2.8.1"
   }
 }

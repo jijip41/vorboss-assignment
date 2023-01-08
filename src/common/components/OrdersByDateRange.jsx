@@ -1,7 +1,7 @@
 import { useState } from "react"
 import DatePicker from "react-datepicker"
 
-import { CalendarContainer } from "../components/CalendarContainer.jsx"
+import { CalendarContainer } from "../components/CalendarContainer"
 import { getOrdersByDateRange } from "../helper/getOrders"
 
 export function OrdersByDateRange({ orders }) {
