@@ -1,4 +1,4 @@
-import { sortOrdersByDate } from "../helper/sort"
+import { sortOrdersByDate } from "../helper/sort.jsx"
 
 export function Table({ orders }) {
   return (

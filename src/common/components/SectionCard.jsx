@@ -1,11 +1,11 @@
 import { memo, useState } from "react"
 import { CaretDown, CaretUp } from "phosphor-react"
 
-import { useOrders } from "../hooks/useOrders"
-import { getSectionDetails } from "../reducer/getSectionDetails"
-import { monthlyRevenue } from "../constants/monthlyRevenue"
+import { useOrders } from "../hooks/useOrders.jsx"
+import { getSectionDetails } from "../helper/getSectionDetails.jsx"
+import { monthlyRevenue } from "../constants/monthlyRevenue.jsx"
 
-import { LineGraph } from "./LineGraph"
+import { LineGraph } from "./LineGraph.jsx"
 
 export const SectionCard = memo(({ typeName }) => {
   const [open, setOpen] = useState(false)

@@ -1,8 +1,8 @@
 import { useState } from "react"
 import DatePicker from "react-datepicker"
 
-import { CalendarContainer } from "../components/CalendarContainer"
-import { getOrdersByDateRange } from "../helper/getOrders"
+import { CalendarContainer } from "../components/CalendarContainer.jsx"
+import { getOrdersByDateRange } from "../helper/getOrders.jsx"
 
 export function OrdersByDateRange({ orders }) {
   const [startDate, setStartDate] = useState(new Date())

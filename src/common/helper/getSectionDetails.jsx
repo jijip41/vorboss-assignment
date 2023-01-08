@@ -1,11 +1,12 @@
 import { getMonth } from "date-fns"
 
-import { useOrders } from "../hooks/useOrders"
-import { detailsContent } from "../constants/detailContent"
-import { formatNumber } from "../helper/formatNumbers"
-import { getOrdersByStatus } from "../helper/getOrders"
-import { sortOrdersByMonth } from "../helper/sort"
-import { getTotalRevenue } from "../helper/sum"
+import { useOrders } from "../hooks/useOrders.jsx"
+import { detailsContent } from "../constants/detailContent.jsx"
+
+import { formatNumber } from "./formatNumbers.jsx"
+import { getOrdersByStatus } from "./getOrders.jsx"
+import { sortOrdersByMonth } from "./sort.jsx"
+import { getTotalRevenue } from "./sum.jsx"
 
 const monthToday = getMonth(new Date())
 export function getSectionDetails(typeName) {

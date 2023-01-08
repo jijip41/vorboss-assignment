@@ -1,13 +1,13 @@
 import "../index.css"
 import "react-calendar/dist/Calendar.css"
 
-import { SectionCard } from "../common/components/SectionCard"
-import { OrdersByDateRange } from "../common/components/OrdersByDateRange"
-import { Table } from "../common/components/Table"
-import { useOrders } from "../common/hooks/useOrders"
+import { SectionCard } from "../common/components/SectionCard.jsx"
+import { OrdersByDateRange } from "../common/components/OrdersByDateRange.jsx"
+import { Table } from "../common/components/Table.jsx"
+import { useOrders } from "../common/hooks/useOrders.jsx"
 
-import { LoadingPage } from "./LoadingPage"
-import { ErrorPage } from "./ErrorPage"
+import { LoadingPage } from "./LoadingPage.jsx"
+import { ErrorPage } from "./ErrorPage.jsx"
 
 export function Home() {
   const { isLoading, error, orders } = useOrders()
