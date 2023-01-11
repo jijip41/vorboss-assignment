@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 
-import { getAllOrders } from "../api/airtable.jsx"
+import { getAllOrders } from "../api/airtable"
 
 export function useOrders() {
   const {

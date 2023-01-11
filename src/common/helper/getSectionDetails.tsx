@@ -1,6 +1,6 @@
 import { getMonth } from "date-fns"
 
-import { useOrders } from "../hooks/useOrders.jsx"
+import { useOrders } from "../hooks/useOrders"
 import { detailsContent } from "../constants/detailContent.jsx"
 
 import { formatNumber } from "./formatNumbers.jsx"
@@ -9,7 +9,7 @@ import { sortOrdersByMonth } from "./sort.jsx"
 import { getTotalRevenue } from "./sum.jsx"
 
 const monthToday = getMonth(new Date())
-export function getSectionDetails(typeName) {
+export function getSectionDetails(typeName: string) {
   const { orders } = useOrders()
 
   switch (typeName) {

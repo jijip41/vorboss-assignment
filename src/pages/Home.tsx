@@ -1,10 +1,10 @@
 import "../index.css"
 import "react-calendar/dist/Calendar.css"
 
-import { SectionCard } from "../common/components/SectionCard.jsx"
+import { SectionCard } from "../common/components/SectionCard"
 import { OrdersByDateRange } from "../common/components/OrdersByDateRange.jsx"
 import { Table } from "../common/components/Table.jsx"
-import { useOrders } from "../common/hooks/useOrders.jsx"
+import { useOrders } from "../common/hooks/useOrders"
 
 import { LoadingPage } from "./LoadingPage.jsx"
 import { ErrorPage } from "./ErrorPage.jsx"
