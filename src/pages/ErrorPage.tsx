@@ -1,6 +1,6 @@
 import { CircleWavyWarning } from "phosphor-react"
 
-export function ErrorPage(props) {
+export function ErrorPage() {
   return (
     <div className="flex-col-center w-h-screen">
       <CircleWavyWarning size={32} className="text-color-vorboss1" />

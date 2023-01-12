@@ -1,7 +1,8 @@
-import { formatNumber } from "../helper/formatNumbers.jsx"
-import { getOrdersByStatus } from "../helper/getOrders.jsx"
+import { formatNumber } from "../helper/formatNumbers"
+import { getOrdersByStatus } from "../helper/getOrders"
+import { Order } from "../helper/getSectionDetails"
 
-export function detailsContent(orders) {
+export function detailsContent(orders: Order[]) {
   return [
     {
       name: "Orders shipped",

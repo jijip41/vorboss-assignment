@@ -6,8 +6,9 @@ import {
   YAxis,
   Tooltip,
 } from "recharts"
+import { Order } from "../helper/getSectionDetails"
 
-export function LineGraph(orders) {
+export function LineGraph(orders: { orders: Order[] }) {
   const data = orders
   return (
     <div style={{ width: "90%", height: 300 }} className="pb-md">

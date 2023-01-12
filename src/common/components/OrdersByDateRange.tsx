@@ -1,20 +1,21 @@
 import { useState } from "react"
 import DatePicker from "react-datepicker"
 
-import { CalendarContainer } from "../components/CalendarContainer.jsx"
-import { getOrdersByDateRange } from "../helper/getOrders.jsx"
+import { CalendarContainer } from "./CalendarContainer"
+import { getOrdersByDateRange } from "../helper/getOrders"
+import { Order } from "../helper/getSectionDetails"
 
-export function OrdersByDateRange({ orders }) {
-  const [startDate, setStartDate] = useState(new Date())
-  const [endDate, setEndDate] = useState(new Date())
+export function OrdersByDateRange({ orders }: { orders: Order[] }) {
+  const [startDate, setStartDate] = useState<Date>(new Date())
+  const [endDate, setEndDate] = useState<Date>(new Date())
   const [ordersByRange, setOrdersByRange] = useState([])
 
-  const handleStartDateChange = date => {
+  const handleStartDateChange = (date: Date) => {
     setStartDate(date)
     setOrdersByRange(getOrdersByDateRange(orders, date, endDate))
   }
 
-  const handleEndDateChange = date => {
+  const handleEndDateChange = (date: Date) => {
     setEndDate(date)
     setOrdersByRange(getOrdersByDateRange(orders, startDate, date))
   }
@@ -26,6 +27,7 @@ export function OrdersByDateRange({ orders }) {
 
         <DatePicker
           selected={startDate}
+          onChange={handleStartDateChange}
           onCalendarClose={() => handleStartDateChange(startDate)}
           calendarContainer={() => CalendarContainer(startDate, setStartDate)}
           shouldCloseOnSelect={true}

@@ -2,12 +2,12 @@ import "../index.css"
 import "react-calendar/dist/Calendar.css"
 
 import { SectionCard } from "../common/components/SectionCard"
-import { OrdersByDateRange } from "../common/components/OrdersByDateRange.jsx"
-import { Table } from "../common/components/Table.jsx"
+import { OrdersByDateRange } from "../common/components/OrdersByDateRange"
+import { Table } from "../common/components/Table"
 import { useOrders } from "../common/hooks/useOrders"
 
-import { LoadingPage } from "./LoadingPage.jsx"
-import { ErrorPage } from "./ErrorPage.jsx"
+import { LoadingPage } from "./LoadingPage"
+import { ErrorPage } from "./ErrorPage"
 
 export function Home() {
   const { isLoading, error, orders } = useOrders()
@@ -15,7 +15,7 @@ export function Home() {
   return (
     <main>
       {isLoading && <LoadingPage />}
-      {error && <ErrorPage size={32} />}
+      {error && <ErrorPage />}
       {orders && (
         <div className="">
           <div className="flex-col section-card-conteiner">
